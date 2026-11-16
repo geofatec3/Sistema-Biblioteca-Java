@@ -1,0 +1,14 @@
+# Ignorar dependências e builds pesados
+node_modules/
+target/
+dist/
+.mvn/
+
+# Ignorar configurações de IDEs
+.idea/
+*.iml
+.vscode/
+
+# Ignorar arquivos de ambiente com senhas
+.env
+application-local.properties

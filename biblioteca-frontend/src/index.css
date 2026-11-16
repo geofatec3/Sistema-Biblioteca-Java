@@ -1,0 +1,694 @@
+
+/* ==========================================
+   SISTEMA DE BIBLIOTECA
+========================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #1e293b;
+  background: #f1f5f9;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ==========================================
+   ESTRUTURA PRINCIPAL
+========================================== */
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ==========================================
+   MENU LATERAL
+========================================== */
+
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  background: #172338;
+  color: #fff;
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  margin: 0 0 35px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 9px;
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.sidebar a:hover {
+  background: #2d3c55;
+  color: #fff;
+}
+
+/* ==========================================
+   CONTEÚDO
+========================================== */
+
+.content {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+  padding: 35px;
+  overflow-x: hidden;
+}
+
+.content > h1 {
+  margin: 0 0 25px;
+  font-size: 32px;
+  color: #172338;
+  font-weight: 700;
+}
+
+.content > h2 {
+  color: #172338;
+}
+
+.content > p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   DASHBOARD
+========================================== */
+
+.dashboard-titulo {
+  text-align: center;
+  margin: 0;
+  font-size: 32px;
+  color: #172338;
+}
+
+.dashboard-subtitulo {
+  text-align: center;
+  margin: 8px 0 30px;
+  font-size: 16px;
+  color: #64748b;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.dashboard-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+  padding: 24px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+  border-left: 5px solid #2563eb;
+}
+
+.dashboard-card > div:last-child {
+  min-width: 0;
+}
+
+.dashboard-card span {
+  display: block;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dashboard-card h2 {
+  margin: 10px 0 0;
+  font-size: 30px;
+  font-weight: 600;
+  color: #172338;
+}
+
+.dashboard-card-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 65px;
+  height: 65px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  font-size: 28px;
+}
+
+.card-azul {
+  border-left-color: #3b82f6;
+}
+
+.card-verde {
+  border-left-color: #10b981;
+}
+
+.card-roxo {
+  border-left-color: #8b5cf6;
+}
+
+.card-laranja {
+  border-left-color: #f59e0b;
+}
+
+.card-vermelho {
+  border-left-color: #ef4444;
+}
+
+/* ==========================================
+   EMPRÉSTIMOS RECENTES
+========================================== */
+
+.dashboard-recentes {
+  background: #fff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+  min-width: 0;
+}
+
+.dashboard-recentes h2 {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 22px;
+  color: #172338;
+}
+
+/* ==========================================
+   PESQUISA E BOTÕES
+========================================== */
+
+.livros-toolbar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.livros-toolbar input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #172338;
+  outline: none;
+}
+
+.livros-toolbar input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.btn-novo {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 13px 20px;
+  font-weight: 600;
+}
+
+.btn-novo:hover {
+  background: #1d4ed8;
+}
+
+.livros-toolbar .btn-novo {
+  min-height: 48px;
+  white-space: nowrap;
+}
+
+/* ==========================================
+   FORMULÁRIOS
+========================================== */
+
+.form-livro {
+  background: #fff;
+  padding: 28px;
+  margin-bottom: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.form-livro h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  font-size: 22px;
+  color: #172338;
+}
+
+.form-livro label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+  align-self: end;
+}
+
+.form-livro input,
+.form-livro select {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  padding: 0 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #172338;
+  outline: none;
+}
+
+.form-livro input:focus,
+.form-livro select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-acoes {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.form-acoes button {
+  min-width: 120px;
+}
+
+/* ==========================================
+   BOTÃO CANCELAR
+========================================== */
+
+.btn-cancelar {
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  border-radius: 9px;
+  padding: 13px 20px;
+  font-weight: 600;
+}
+
+.btn-cancelar:hover {
+  background: #cbd5e1;
+}
+
+/* ==========================================
+   TABELAS - DESKTOP
+========================================== */
+
+.tabela-livros {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+}
+
+.tabela-livros thead {
+  background: #1e293b;
+  color: #fff;
+}
+
+.tabela-livros th {
+  padding: 18px 20px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tabela-livros td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.tabela-livros tbody tr:hover {
+  background: #f8fafc;
+}
+
+.tabela-livros tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela-livros th,
+.tabela-livros td {
+  white-space: nowrap;
+}
+
+/* ==========================================
+   BOTÕES DAS TABELAS
+========================================== */
+
+.btn-editar,
+.btn-excluir {
+  border: none;
+  border-radius: 7px;
+  padding: 9px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.btn-editar {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.btn-editar:hover {
+  background: #bfdbfe;
+}
+
+.btn-excluir {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-excluir:hover {
+  background: #fecaca;
+}
+
+/* ==========================================
+   STATUS DOS EMPRÉSTIMOS
+========================================== */
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-andamento {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-atrasado {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-devolvido {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* ==========================================
+   DEVOLUÇÕES
+========================================== */
+
+.content > h2 {
+  margin-bottom: 12px;
+}
+
+.content > h2 + p {
+  margin-bottom: 20px;
+}
+
+/* ==========================================
+   TABLETS
+========================================== */
+
+@media (max-width: 1100px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+
+  .content {
+    padding: 25px;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-card {
+    padding: 20px;
+  }
+}
+
+/* ==========================================
+   CELULARES
+========================================== */
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    padding: 18px 12px;
+  }
+
+  .sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .sidebar a {
+    padding: 10px 12px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .content {
+    width: 100%;
+    padding: 22px 15px;
+  }
+
+  .content > h1 {
+    font-size: 27px;
+    text-align: center;
+  }
+
+  .dashboard-titulo {
+    font-size: 27px;
+  }
+
+  .dashboard-subtitulo {
+    margin-bottom: 24px;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .dashboard-card {
+    padding: 20px;
+  }
+
+  .dashboard-recentes {
+    padding: 18px;
+  }
+
+  .livros-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .livros-toolbar input {
+    width: 100%;
+    flex: none;
+  }
+
+  .livros-toolbar .btn-novo {
+    width: 100%;
+  }
+
+  .form-livro {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .form-livro h2,
+  .form-acoes {
+    grid-column: auto;
+  }
+
+  .form-acoes {
+    flex-direction: column;
+  }
+
+  .form-acoes button {
+    width: 100%;
+  }
+
+  /* Rolagem horizontal no celular */
+
+  .content > .tabela-livros,
+  .dashboard-recentes > .tabela-livros {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .content > .tabela-livros {
+    min-width: 0;
+  }
+
+  .content > .tabela-livros thead,
+  .content > .tabela-livros tbody {
+    width: max-content;
+  }
+
+  .content > .tabela-livros th,
+  .content > .tabela-livros td {
+    min-width: 130px;
+  }
+
+  .dashboard-recentes > .tabela-livros {
+    min-width: 0;
+  }
+
+  .dashboard-recentes > .tabela-livros thead,
+  .dashboard-recentes > .tabela-livros tbody {
+    width: max-content;
+  }
+
+  .dashboard-recentes .tabela-livros th,
+  .dashboard-recentes .tabela-livros td {
+    min-width: 150px;
+  }
+
+  .content > h2 {
+    font-size: 21px;
+  }
+
+  .content > p {
+    font-size: 14px;
+  }
+}
+
+/* ==========================================
+   CELULARES PEQUENOS
+========================================== */
+
+@media (max-width: 400px) {
+  .sidebar a {
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+
+  .dashboard-card {
+    gap: 13px;
+    padding: 17px;
+  }
+
+  .dashboard-card-icone {
+    width: 55px;
+    height: 55px;
+    font-size: 24px;
+  }
+
+  .dashboard-card h2 {
+    font-size: 26px;
+  }
+
+  .content {
+    padding: 18px 12px;
+  }
+}
+
+/* CORREÇÃO DEFINITIVA DAS TABELAS NO DESKTOP */
+
+@media (min-width: 769px) {
+  .content > table.tabela-livros {
+    width: 100% !important;
+    display: table !important;
+    table-layout: fixed !important;
+    border-collapse: collapse;
+  }
+
+  .content > table.tabela-livros thead {
+    display: table-header-group;
+    width: auto;
+  }
+
+  .content > table.tabela-livros tbody {
+    display: table-row-group;
+    width: auto;
+  }
+
+  .content > table.tabela-livros tr {
+    display: table-row;
+  }
+
+  .content > table.tabela-livros th,
+  .content > table.tabela-livros td {
+    width: auto;
+    overflow-wrap: anywhere;
+  }
+}
